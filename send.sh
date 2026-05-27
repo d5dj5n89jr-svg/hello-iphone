@@ -54,7 +54,8 @@ else
   if (( DELAY < 0 )); then
     DELAY=$(( DELAY + 86400 ))   # push to tomorrow if the time has passed today
   fi
-  HUMAN=$(date -r $(( NOW_EPOCH + DELAY )) "+%H:%M on %b %d")
+  ARRIVAL_EPOCH=$(( NOW_EPOCH + DELAY ))
+  HUMAN=$(date -r "$ARRIVAL_EPOCH" "+%H:%M on %b %d")
 
   # Spawn background job that sleeps then sends
   (sleep "$DELAY" && _send) &
